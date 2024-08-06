@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class LoginResponse {
-    private long id;
+    private String id;
     private String name;
     private String email;
     private String password;

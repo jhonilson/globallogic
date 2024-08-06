@@ -4,6 +4,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 @Service
 public class JwtService {
 
-    private static final long EXPIRATION=1000*60*3; // 15 minutes
+    //@Value("${token.expiration}")
+    private static final long EXPIRATION = 1000 * 60 * 3; // 10 hours
+    //@Value("${token.secret}")
     private static final String SECRET_KEY="586E3272357538782F413F4428472B4B6250655368566B597033733676397924"; // 256 bits
 
     public String createToken(String userid) {

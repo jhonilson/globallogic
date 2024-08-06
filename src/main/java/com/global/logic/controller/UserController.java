@@ -8,6 +8,7 @@ import com.global.logic.security.services.JwtService;
 import com.global.logic.services.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.var;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,6 +23,8 @@ import java.util.UUID;
 @RequestMapping("/api")
 public class UserController {
 
+    @Value("${encrypt.salt}")
+    private String salt;
     private final UserServiceImpl userService;
     private final JwtService jwtService;
 
@@ -36,11 +39,12 @@ public class UserController {
         //String pwdEncrypt = passwordEncoder().encode(user.getPassword());
         String pwdEncrypt = hashPassword(user.getPassword());
         user.setPassword(pwdEncrypt);
+        final var uuid = UUID.randomUUID().toString();
+        user.setId(uuid);
         User u = userService.save(user);
         String token = jwtService.createToken(u.getEmail());
         u.setToken(token);
-        final var uuid = UUID.randomUUID().toString();
-        //u.setId(uuid);
+
         return ResponseEntity.ok(SignupResponse.builder()
                 .id(u.getId())
                 .created(u.getCreated())
@@ -86,6 +90,6 @@ public class UserController {
     }*/
 
     public String hashPassword(String plainTextPassword){
-        return BCrypt.hashpw(plainTextPassword, "$2a$10$2w6z7z7z7z7z7z7z7z7z7z");
+        return BCrypt.hashpw(plainTextPassword, salt);
     }
 }
