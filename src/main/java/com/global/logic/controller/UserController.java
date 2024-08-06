@@ -74,7 +74,7 @@ public class UserController {
                     .lastLogin(user.getLastLogin())
                     .isActive(user.getIsActive())
                     .token(user.getToken())
-                    //.phones(user.getPhones())
+                    .phones(user.getPhones())
                     .build());
         }
     }

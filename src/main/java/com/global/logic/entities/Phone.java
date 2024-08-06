@@ -16,9 +16,8 @@ import javax.persistence.*;
 @Table(name = "phones")
 public class Phone {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //private Long id;
     private Long number;
     private int cityCode;
     private String countryCode;

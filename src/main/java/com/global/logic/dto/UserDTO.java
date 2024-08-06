@@ -1,8 +1,10 @@
 package com.global.logic.dto;
 
+import com.global.logic.entities.Phone;
 import lombok.Builder;
 import lombok.Data;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -15,5 +17,5 @@ public class UserDTO {
         private LocalDateTime created;
         private LocalDateTime lastLogin;
         private Boolean isActive;
-        private PhoneDTO[] phones;
+        private List<Phone> phones;
 }

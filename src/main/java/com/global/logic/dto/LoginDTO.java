@@ -19,7 +19,7 @@ public class LoginDTO {
     @NotBlank(message = "Password es obligatorio")
     @Pattern(
             regexp = "^(?=.*[A-Z])(?=.*\\d{2})(?=.*[a-z]).{8,12}$",
-            message = "Password must have one uppercase letter, two numbers, and be between 8 and 12 characters long"
+            message = "Password debe tener una letra mayuscula, dos numeros, y tener entre 8 y 12 caracteres"
     )
     private String password;
 }
