@@ -1,6 +1,5 @@
 package com.global.logic.services;
 
-import com.global.logic.dto.UserDTO;
 import com.global.logic.entities.User;
 import com.global.logic.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -31,8 +30,4 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmailAndPassword(email, password);
     }
 
-/*    @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }*/
 }

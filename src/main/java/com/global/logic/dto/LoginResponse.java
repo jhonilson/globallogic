@@ -6,11 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
 public class LoginResponse {
-    private long id;
+    private String id;
     private String name;
     private String email;
     private String password;
@@ -20,5 +21,5 @@ public class LoginResponse {
     @JsonFormat(pattern = "MMM dd, yyyy hh:mm:ss a")
     private LocalDateTime lastLogin;
     private Boolean isActive;
-    private PhoneDTO[] phones;
+    private List<Phone> phones;
 }
