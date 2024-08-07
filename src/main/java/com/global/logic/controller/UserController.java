@@ -7,6 +7,7 @@ import com.global.logic.entities.User;
 import com.global.logic.security.services.JwtService;
 import com.global.logic.services.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Hidden;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ public class UserController {
     private final UserServiceImpl userService;
     private final JwtService jwtService;
 
+    @Ignore
     public UserController(UserServiceImpl userService, JwtService jwtService) {
         this.userService = userService;
         this.jwtService = jwtService;
@@ -79,16 +81,14 @@ public class UserController {
         }
     }
 
+    @Ignore
     @Hidden
     @GetMapping("/users")
     public List<User> findAll() {
         return userService.findAll();
     }
 
-/*    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }*/
-
+    @Ignore
     public String hashPassword(String plainTextPassword){
         return BCrypt.hashpw(plainTextPassword, salt);
     }

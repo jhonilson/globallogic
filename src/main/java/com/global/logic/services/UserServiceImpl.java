@@ -2,6 +2,7 @@ package com.global.logic.services;
 
 import com.global.logic.entities.User;
 import com.global.logic.repositories.UserRepository;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    @Ignore
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
