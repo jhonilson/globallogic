@@ -76,3 +76,7 @@ curl --location 'http://localhost:8080/api/sign-up' \
     ]
 }'
 ```
+
+
+### SWAGGER
+http://localhost:8080/swagger-ui/index.html
