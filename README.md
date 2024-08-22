@@ -77,6 +77,14 @@ curl --location 'http://localhost:8080/api/sign-up' \
 }'
 ```
 
+# DIAGRAMA UML
+
+## Diagrama de Componentes
+![image](https://github.com/user-attachments/assets/15332f8a-91a0-4366-af14-717657dfa297)
+
+## Diagrama de Secuencias
+![image](https://github.com/user-attachments/assets/ca5ffee1-7f58-475a-9cf8-20a7d490eb5b)
+
 
 ### SWAGGER
 http://localhost:8080/swagger-ui/index.html
