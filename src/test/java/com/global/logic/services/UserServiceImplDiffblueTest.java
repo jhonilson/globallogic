@@ -8,6 +8,7 @@ import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.global.logic.dto.SignupDTO;
 import com.global.logic.entities.User;
 import com.global.logic.repositories.UserRepository;
 
@@ -32,7 +33,6 @@ class UserServiceImplDiffblueTest {
     @Autowired
     private UserServiceImpl userServiceImpl;
 
-
     @Test
     void testSave() {
         User user = new User();
@@ -47,7 +47,7 @@ class UserServiceImplDiffblueTest {
         user.setToken("ABC123");
         when(userRepository.save(Mockito.<User>any())).thenReturn(user);
 
-        User user2 = new User();
+        SignupDTO user2 = new SignupDTO();
         user2.setCreated(LocalDate.of(1970, 1, 1).atStartOfDay());
         user2.setEmail("jane.doe@example.org");
         user2.setId("42");
@@ -65,6 +65,38 @@ class UserServiceImplDiffblueTest {
         assertSame(user, actualSaveResult);
     }
 
+    /**
+     * Method under test: {@link UserServiceImpl#save(SignupDTO)}
+     */
+    @Test
+    void testSave2() {
+        // Arrange
+        User user = new User();
+        user.setCreated(LocalDate.of(1970, 1, 1).atStartOfDay());
+        user.setEmail("jane.doe@example.org");
+        user.setId("42");
+        user.setIsActive(true);
+        user.setLastLogin(LocalDate.of(1970, 1, 1).atStartOfDay());
+        user.setName("Name");
+        user.setPassword("iloveyou");
+        user.setPhones(new ArrayList<>());
+        user.setToken("ABC123");
+        when(userRepository.save(Mockito.<User>any())).thenReturn(user);
+
+        SignupDTO user2 = new SignupDTO();
+        user2.setEmail("jane.doe@example.org");
+        user2.setId("42");
+        user2.setName("Name");
+        user2.setPassword("iloveyou");
+        user2.setPhones(new ArrayList<>());
+
+        // Act
+        User actualSaveResult = userServiceImpl.save(user2);
+
+        // Assert
+        verify(userRepository).save(isA(User.class));
+        assertSame(user, actualSaveResult);
+    }
 
     @Test
     void testFindAll() {
@@ -77,7 +109,6 @@ class UserServiceImplDiffblueTest {
         assertTrue(actualFindAllResult.isEmpty());
         assertSame(userList, actualFindAllResult);
     }
-
 
     @Test
     void testFindByEmailAndPassword() {
@@ -98,5 +129,31 @@ class UserServiceImplDiffblueTest {
 
         verify(userRepository).findByEmailAndPassword(eq("jane.doe@example.org"), eq("iloveyou"));
         assertSame(user, actualFindByEmailAndPasswordResult);
+    }
+
+    /**
+     * Method under test: {@link UserServiceImpl#findByEmail(String)}
+     */
+    @Test
+    void testFindByEmail() {
+        // Arrange
+        User user = new User();
+        user.setCreated(LocalDate.of(1970, 1, 1).atStartOfDay());
+        user.setEmail("jane.doe@example.org");
+        user.setId("42");
+        user.setIsActive(true);
+        user.setLastLogin(LocalDate.of(1970, 1, 1).atStartOfDay());
+        user.setName("Name");
+        user.setPassword("iloveyou");
+        user.setPhones(new ArrayList<>());
+        user.setToken("ABC123");
+        when(userRepository.findByEmail(Mockito.<String>any())).thenReturn(user);
+
+        // Act
+        User actualFindByEmailResult = userServiceImpl.findByEmail("jane.doe@example.org");
+
+        // Assert
+        verify(userRepository).findByEmail(eq("jane.doe@example.org"));
+        assertSame(user, actualFindByEmailResult);
     }
 }

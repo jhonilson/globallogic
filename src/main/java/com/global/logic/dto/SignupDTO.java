@@ -1,15 +1,19 @@
 package com.global.logic.dto;
 
+import com.global.logic.entities.Phone;
 import lombok.Data;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @Data
-public class LoginDTO {
+public class SignupDTO {
+
+    private String id;
+
+    private String name;
     @NotBlank(message = "Email es obligatorio")
-    //@Email(message = "Email should be valid")
     @Pattern(
             regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,6}$",
             message = "Formato de email incorrecto"
@@ -22,4 +26,7 @@ public class LoginDTO {
             message = "Password debe tener una mayuscula, dos numeros, y entre 8 y 12 caracteres"
     )
     private String password;
+
+    private List<Phone> phones;
+
 }

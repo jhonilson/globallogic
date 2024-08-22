@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         JwtService jwtService = new JwtService();
-        final var jwtAuthenticationFilter = new JwtAuthenticationFilter(jwtService);
+        final JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(jwtService);
 
 /*        http.csrf(csrf -> csrf.disable())
                 .authorizeRequests(requests -> requests

@@ -1,5 +1,6 @@
 package com.global.logic.services;
 
+import com.global.logic.dto.SignupDTO;
 import com.global.logic.entities.User;
 import com.global.logic.repositories.UserRepository;
 import jdk.nashorn.internal.ir.annotations.Ignore;
@@ -17,8 +18,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(User user) {
-        return userRepository.save(user);
+    public User save(SignupDTO user) {
+        User userEntity = new User();
+        userEntity.setId(user.getId());
+        userEntity.setEmail(user.getEmail());
+        userEntity.setName(user.getName());
+        userEntity.setPassword(user.getPassword());
+        userEntity.setPhones(user.getPhones());
+        return userRepository.save(userEntity);
     }
 
     @Ignore
@@ -30,6 +37,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmailAndPassword(String email, String password) {
         return userRepository.findByEmailAndPassword(email, password);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
 }

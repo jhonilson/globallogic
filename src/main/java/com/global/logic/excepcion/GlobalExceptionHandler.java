@@ -38,4 +38,18 @@ public class GlobalExceptionHandler {
         Error errorWrapper = new Error(Collections.singletonList(errorResponse));
         return new ResponseEntity<>(errorWrapper, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    // Manejo de la excepción para usuario ya existente
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<Error> handleUserAlreadyExistsException(UserAlreadyExistsException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                ex.getMessage()
+        );
+        Error errorWrapper = new Error(Collections.singletonList(errorResponse));
+        return new ResponseEntity<>(errorWrapper, HttpStatus.CONFLICT);
+    }
+
 }
